@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorenzo Bagnasacco</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --navy: #0f2044;
+    --navy-soft: #1c2f5a;
+    --gold: #c9a84c;
+    --gold-soft: #e6c97a;
+    --cream: #f5f0e8;
+    --border: rgba(201,168,76,0.25);
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BACKGROUND */
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: linear-gradient(160deg, #0d1b3e, #1a3260, #0f2044);
+    color: var(--cream);
+}
+
+/* PAGE */
+.container {
+    max-width: 820px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+}
+
+nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+    padding: 6px 12px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--gold-soft);
+}
+
+nav a.active {
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+/* IMAGE */
+.profile-img {
+    width: 120px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* TEXT */
+.name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.3rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.role {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    color: var(--gold-soft);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.contact {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+}
+
+.contact a {
+    color: var(--gold-soft);
+    text-decoration: none;
+}
+
+.contact a:hover {
+    color: white;
+}
+
+/* SECTION */
+.section {
+    margin-top: 40px;
+}
+
+.section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+.section p {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <nav>
+        <a class="active" href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="personal.html">Personal</a>
+    </nav>
+
+    <div class="header">
+        <!-- Replace photo.jpg with your actual image -->
+        <img src="photo.jpg" alt="Profile photo" class="profile-img">
+
+        <div>
+            <div class="name">Lorenzo Bagnasacco</div>
+            <div class="role">PhD Student in Nanoscience</div>
+
+            <div class="contact">
+                Scuola Normale Superiore, Pisa<br>
+                Office 82, Piazza dei Cavalieri 7<br>
+                <a href="mailto:lorenzo.bagnasacco@sns.it">
+                    lorenzo.bagnasacco@sns.it
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>About</h2>
+
+        <p>
+     I am Lorenzo Bagnasacco, a Ph.D. student in Scuola Normale Superiore in Pisa. My fascination with quantum physics dates back to childhood, and now, as I delve deeper into my doctoral thesis, I am excited to uncover the secrets of the quantum world. Outside of academia, I am an avid skier and mountain biker, finding solace and inspiration in the natural beauty of the outdoors. In addition, the discipline instilled by my years of practicing karate has been instrumental in achieving many of my goals. I hold a first DAN black belt in karate, a testament to the dedication and perseverance that this martial art has taught me.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
