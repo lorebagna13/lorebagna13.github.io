@@ -4,84 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Personal – Lorenzo Bagnasacco</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root {
-    --navy: #0f2044;
-    --gold: #c9a84c;
+    --navy:       #0f2044;
+    --navy-mid:   #1a3260;
+    --navy-light: #2a4a80;
+    --gold:       #c9a84c;
     --gold-light: #e8c97a;
-    --cream: #f5f0e8;
-    --border: rgba(201,168,76,0.25);
+    --cream:      #f5f0e8;
+    --text:       #1a1a2e;
+    --muted:      #5a6070;
+    --border:     rgba(201,168,76,0.25);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: 'Source Sans 3', sans-serif;
-    background: linear-gradient(160deg, #0d1b3e, #1a3260, #0f2044);
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d1b3e 0%, #162850 35%, #1e3a6e 65%, #0f2044 100%);
     color: var(--cream);
 }
 
-.page-wrapper {
-    max-width: 820px;
-    margin: auto;
-    padding: 60px 30px;
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
 }
 
-/* NAV */
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 50px 30px 80px;
+}
+
 nav {
     display: flex;
-    gap: 10px;
-    margin-bottom: 50px;
+    gap: 8px;
+    margin-bottom: 48px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 15px;
+    padding-bottom: 18px;
 }
 
 nav a {
-    font-size: 0.8rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    color: rgba(255,255,255,0.5);
-    padding: 6px 12px;
+    color: rgba(245,240,232,0.55);
+    padding: 6px 14px;
+    border-radius: 3px;
+    transition: color 0.2s, background 0.2s;
 }
 
-nav a:hover { color: var(--gold-light); }
+nav a:hover {
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.08);
+}
 
 nav a.active {
     color: var(--gold);
     border-bottom: 2px solid var(--gold);
 }
 
-/* TEXT */
 h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.3rem;
-    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
 }
 
 h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
+    font-weight: 500;
+    font-size: 1.35rem;
     color: var(--gold);
-    margin-top: 40px;
-    margin-bottom: 15px;
+    letter-spacing: 0.05em;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 8px;
+    margin-top: 42px;
 }
 
 p {
-    font-size: 0.98rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.85);
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.85);
     margin-bottom: 14px;
 }
 
-/* TIMELINE STYLE */
 .timeline {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .entry {
@@ -91,39 +117,59 @@ p {
 }
 
 .year {
-    width: 80px;
+    width: 60px;
     font-weight: 600;
     color: var(--gold);
     flex-shrink: 0;
 }
 
+.content {
+    flex: 1;
+}
+
 .content strong {
     color: var(--cream);
+    font-weight: 600;
 }
 
 .content p {
     margin-top: 6px;
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    color: rgba(245,240,232,0.8);
 }
 
-/* SIMPLE LIST */
-ul {
-    list-style: none;
-}
+ul { list-style: none; padding: 0; }
 
 ul li {
-    padding: 8px 0;
-    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.8);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    line-height: 1.5;
 }
 
 ul li::before {
-    content: "— ";
+    content: '—';
     color: var(--gold);
+    opacity: 0.6;
+    flex-shrink: 0;
+    font-size: 0.8rem;
 }
+
+ul li strong {
+    color: var(--cream);
+    font-weight: 600;
+}
+
+a { color: var(--gold-light); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+
 </style>
 </head>
-
 <body>
 
 <div class="page-wrapper">
@@ -144,7 +190,6 @@ ul li::before {
         taught me.
     </p>
 
-    <!-- SPORTS -->
     <h2>Sports</h2>
 
     <div class="timeline">
@@ -171,14 +216,14 @@ ul li::before {
                 </p>
             </div>
         </div>
-        
+
         <div class="entry">
-            <div class="year">2003-present</div>
+            <div class="year">2003–present</div>
             <div class="content">
                 <strong>Skiing</strong>
             </div>
         </div>
-        
+
         <div class="entry">
             <div class="year">On sunny Sundays</div>
             <div class="content">
@@ -188,32 +233,30 @@ ul li::before {
 
     </div>
 
-    <!-- PERSONAL DEVELOPMENT -->
     <h2>Personal Development</h2>
-    
-     <div class="entry">
-        <div class="year">2017</div>
-        <div class="content">
-            <strong>National Mathematics Olympiad (Team Final)</strong> — Cesenatico, Italy
-            <p>
-        Me and my team, representing the scientific high school "A. Poliziano" from Montepulciano,
-participated in the national final of the team math olympiad competition.
-        </p>
-        </div>
-    </div>
-
-    <div class="entry">
-        <div class="year">2016</div>
-        <div class="content">
-            <strong>Bocconi Math Games</strong> — Bocconi University, Milan, Italy
-            <p>
-            I qualified and participated in the international final of the Bocconi Math Games.
-            </p>
-            
-        </div>
-    </div>
 
     <div class="timeline">
+
+        <div class="entry">
+            <div class="year">2017</div>
+            <div class="content">
+                <strong>National Mathematics Olympiad (Team Final)</strong> — Cesenatico, Italy
+                <p>
+                    Me and my team, representing the scientific high school "A. Poliziano" from Montepulciano,
+                    participated in the national final of the team math olympiad competition.
+                </p>
+            </div>
+        </div>
+
+        <div class="entry">
+            <div class="year">2016</div>
+            <div class="content">
+                <strong>Bocconi Math Games</strong> — Bocconi University, Milan, Italy
+                <p>
+                    I qualified and participated in the international final of the Bocconi Math Games.
+                </p>
+            </div>
+        </div>
 
         <div class="entry">
             <div class="year">2008–2013</div>
@@ -226,17 +269,19 @@ participated in the national final of the team math olympiad competition.
             </div>
         </div>
 
+        <div class="entry">
+            <div class="year">2013</div>
+            <div class="content">
+                <strong>Diving course</strong>
+                <p>
+                    Diving course under the guidance of coach Emanuele Marini, 
+                    at the Piscine Comunali di Chianciano Terme — Virtus Buonconvento.
+                </p>
+            </div>
+        </div>
+
     </div>
-    
-    <div class="entry">
-    <div class="year">2013</div>
-    <div class="content">
-        <strong>Diving course </strong>
-        <p>
-            Diving course under the guidance of coach Emanuele Marini, 
-            at the Piscine Comunali di Chianciano Terme — Virtus Buonconvento.
-        </p>
-    </div>
+
 </div>
 
 </body>
