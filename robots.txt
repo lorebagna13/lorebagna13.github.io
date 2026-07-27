@@ -1,0 +1,10 @@
+# The alternative editions under /paper/ and /emerald/ carry a
+# <meta name="robots" content="noindex, nofollow"> tag. They are deliberately
+# NOT disallowed here: a crawler has to be able to fetch a page in order to
+# read its noindex tag. Blocking them instead would let the bare URLs show up
+# in results with no content behind them.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://lorebagna13.github.io/sitemap.xml
