@@ -16,11 +16,16 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root: 16px on a phone, growing to 20px on a wide desktop. Every
+       size below is expressed in rem, so the whole page scales with it. */
+    font-size: clamp(1rem, 0.92rem + 0.3vw, 1.25rem);
+}
 
 body {
     font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-    font-size: 17.5px;
+    font-size: 1.09rem;
     line-height: 1.62;
     color: var(--ink);
     background: var(--stock);
@@ -29,7 +34,7 @@ body {
 
 .page {
     position: relative;
-    max-width: 900px;
+    max-width: 56rem;
     margin: 0 auto;
     padding: 40px 46px 38px;
     background: var(--news);
@@ -80,7 +85,7 @@ body {
 
 .masthead {
     display: grid;
-    grid-template-columns: 156px 1fr;
+    grid-template-columns: 9.75rem 1fr;
     gap: 30px;
     align-items: center;
     padding: 22px 0 20px;
@@ -326,7 +331,7 @@ section:first-of-type > p:first-of-type::first-letter {
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 700px) {
-    body { font-size: 16.5px; padding: 12px 8px 30px; }
+    body { font-size: 1.03rem; padding: 12px 8px 30px; }
 
     .page { padding: 26px 20px 26px; }
 
@@ -337,7 +342,7 @@ section:first-of-type > p:first-of-type::first-letter {
 
     h2 { letter-spacing: 0.18em; }
 
-    section:first-of-type > p { columns: 1; }
+    section:first-of-type > p:only-of-type { columns: 1; }
 
     .entry { grid-template-columns: 1fr; gap: 3px; }
     .when { padding-top: 0; }

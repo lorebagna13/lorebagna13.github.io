@@ -19,11 +19,16 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root: 16px on a phone, growing to 20px on a wide desktop. Every
+       size below is expressed in rem, so the whole page scales with it. */
+    font-size: clamp(1rem, 0.92rem + 0.3vw, 1.25rem);
+}
 
 body {
     font-family: 'Pixelify Sans', 'Courier New', monospace;
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1.55;
     color: var(--txt);
     background-color: var(--grass);
@@ -35,7 +40,7 @@ body {
     padding: 24px 16px 40px;
 }
 
-.page { max-width: 700px; margin: 0 auto; }
+.page { max-width: 44rem; margin: 0 auto; }
 
 /* Press Start 2P is ASCII only, so geometric glyphs need their own stack */
 .nav a::before, h2::before, .foot .editions .here::before {
@@ -124,7 +129,7 @@ body {
 }
 
 .portrait {
-    width: 116px;
+    width: 7.25rem;
     flex-shrink: 0;
     display: block;
     /* the tiled background is nearest neighbour scaled, the photograph is not */
@@ -308,7 +313,7 @@ a:hover { color: var(--txt-red); border-bottom-color: var(--txt-red); }
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 620px) {
-    body { font-size: 18px; padding: 14px 10px 30px; }
+    body { font-size: 1.125rem; padding: 14px 10px 30px; }
 
     .nav, section, .masthead { border-radius: 10px; }
     .nav { gap: 4px 14px; padding: 14px 12px; }

@@ -16,11 +16,16 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root: 16px on a phone, growing to 20px on a wide desktop. Every
+       size below is expressed in rem, so the whole page scales with it. */
+    font-size: clamp(1rem, 0.92rem + 0.3vw, 1.25rem);
+}
 
 body {
     font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif;
-    font-size: 16.5px;
+    font-size: 1.03rem;
     line-height: 1.72;
     color: var(--ink);
     background-color: var(--blue);
@@ -38,7 +43,7 @@ body {
 
 .page {
     position: relative;
-    max-width: 880px;
+    max-width: 55rem;
     margin: 0 auto;
     padding: 46px 46px 40px;
     border: 1px solid var(--line);
@@ -109,7 +114,7 @@ body {
 }
 
 .portrait {
-    width: 150px;
+    width: 9.4rem;
     flex-shrink: 0;
     border: 1px solid var(--line);
     padding: 6px;
@@ -314,7 +319,7 @@ em { font-style: italic; }
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 680px) {
-    body { font-size: 15.5px; padding: 12px 10px 30px; }
+    body { font-size: 0.97rem; padding: 12px 10px 30px; }
 
     .page { padding: 30px 20px 26px; }
     .page::before, .page::after { display: none; }

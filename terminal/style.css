@@ -15,11 +15,16 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root: 16px on a phone, growing to 20px on a wide desktop. Every
+       size below is expressed in rem, so the whole page scales with it. */
+    font-size: clamp(1rem, 0.92rem + 0.3vw, 1.25rem);
+}
 
 body {
     font-family: 'IBM Plex Mono', 'Courier New', monospace;
-    font-size: 15px;
+    font-size: 0.9375rem;
     line-height: 1.75;
     color: var(--green);
     background: var(--bg);
@@ -55,7 +60,7 @@ body::after {
 .page {
     position: relative;
     z-index: 1;
-    max-width: 860px;
+    max-width: 54rem;
     margin: 0 auto;
     padding: 42px 0 70px;
     text-shadow: var(--glow);
@@ -120,7 +125,7 @@ body::after {
 }
 
 .portrait {
-    width: 128px;
+    width: 8rem;
     flex-shrink: 0;
     border: 1px solid var(--green-f);
     padding: 5px;
@@ -322,7 +327,7 @@ em { font-style: italic; color: var(--green); }
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 640px) {
-    body { font-size: 14px; padding: 0 14px; }
+    body { font-size: 0.875rem; padding: 0 14px; }
 
     .page { padding: 28px 0 50px; }
 

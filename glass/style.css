@@ -18,11 +18,16 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root: 16px on a phone, growing to 20px on a wide desktop. Every
+       size below is expressed in rem, so the whole page scales with it. */
+    font-size: clamp(1rem, 0.92rem + 0.3vw, 1.25rem);
+}
 
 body {
     font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
-    font-size: 16.5px;
+    font-size: 1.03rem;
     line-height: 1.72;
     color: var(--text);
     background-color: var(--base);
@@ -37,7 +42,7 @@ body {
     padding: 30px 18px 60px;
 }
 
-.page { max-width: 800px; margin: 0 auto; }
+.page { max-width: 50rem; margin: 0 auto; }
 
 /* --- the frosted pane, shared by nav, masthead and sections ------------- */
 
@@ -93,7 +98,7 @@ body {
 }
 
 .portrait {
-    width: 132px;
+    width: 8.25rem;
     flex-shrink: 0;
     display: block;
     border-radius: 16px;
@@ -316,7 +321,7 @@ em { font-style: italic; }
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 640px) {
-    body { font-size: 15.5px; padding: 18px 12px 44px; }
+    body { font-size: 0.97rem; padding: 18px 12px 44px; }
 
     .nav { border-radius: 22px; justify-content: center; }
     .nav a { padding: 8px 15px; font-size: 0.8rem; }
