@@ -1,0 +1,27 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+
+# CV sources — kept in the separate lorebagna13/cv repository
+cv.tex
+cv.pdf
+Figs/
+
+# Old, superseded page
+site.html
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
