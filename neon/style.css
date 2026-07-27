@@ -1,0 +1,367 @@
+/* ---------------------------------------------------------------------------
+   Neon edition. Synthwave: horizon grid, chromatic glow, magenta and cyan.
+   Same content as the main edition, different chrome.
+   --------------------------------------------------------------------------- */
+
+:root {
+    --void:    #0d0420;
+    --violet:  #2a0f4d;
+    --magenta: #ff2fb9;
+    --cyan:    #22e6ff;
+    --amberp:  #ffb457;
+    --text:    #ebe2ff;
+    --text-d:  rgba(235, 226, 255, 0.66);
+    --panel:   rgba(24, 8, 46, 0.72);
+    --edge:    rgba(34, 230, 255, 0.28);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: 'Chakra Petch', 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+    background: linear-gradient(180deg, #100626 0%, #240d45 42%, #3b1160 68%, #16072c 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 26px 18px 0;
+    overflow-x: hidden;
+}
+
+/* the sun sitting on the horizon */
+body::before {
+    content: '';
+    position: fixed;
+    left: 50%;
+    bottom: 3vh;
+    width: 300px;
+    height: 300px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--amberp) 0%, var(--magenta) 62%, #7d1c9e 100%);
+    filter: blur(2px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* the receding grid */
+body::after {
+    content: '';
+    position: fixed;
+    left: -60%;
+    right: -60%;
+    bottom: 0;
+    height: 56vh;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        repeating-linear-gradient(to right,
+            rgba(34, 230, 255, 0.55) 0 2px, transparent 2px 72px),
+        repeating-linear-gradient(to bottom,
+            rgba(255, 47, 185, 0.55) 0 2px, transparent 2px 72px);
+    transform: perspective(420px) rotateX(64deg);
+    transform-origin: 50% 100%;
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding-bottom: 90px;
+}
+
+/* --- navigation --------------------------------------------------------- */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.nav a {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cyan);
+    padding: 9px 18px;
+    border: 1px solid var(--edge);
+    background: var(--panel);
+    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.nav a:hover {
+    color: #fff;
+    border-color: var(--cyan);
+    box-shadow: 0 0 14px rgba(34, 230, 255, 0.45);
+}
+
+.nav a.active {
+    color: var(--magenta);
+    border-color: var(--magenta);
+    box-shadow: 0 0 16px rgba(255, 47, 185, 0.45),
+                inset 0 0 18px rgba(255, 47, 185, 0.12);
+    text-shadow: 0 0 10px rgba(255, 47, 185, 0.7);
+}
+
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    padding: 26px;
+    margin-bottom: 26px;
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    box-shadow: 0 0 30px rgba(34, 230, 255, 0.12),
+                inset 0 0 40px rgba(255, 47, 185, 0.06);
+}
+
+.portrait {
+    width: 140px;
+    flex-shrink: 0;
+    display: block;
+    border: 1px solid var(--magenta);
+    padding: 5px;
+    box-shadow: 0 0 20px rgba(255, 47, 185, 0.45);
+}
+
+.ident { flex: 1; min-width: 0; }
+
+.name {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4.4vw, 2.15rem);
+    line-height: 1.22;
+    letter-spacing: 0.01em;
+    color: #fff;
+    /* the chromatic fringe of a badly converged tube */
+    text-shadow:
+        -2px 0 rgba(255, 47, 185, 0.85),
+         2px 0 rgba(34, 230, 255, 0.85),
+         0 0 26px rgba(255, 47, 185, 0.45);
+    margin-bottom: 14px;
+}
+
+.role {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--cyan);
+    text-shadow: 0 0 12px rgba(34, 230, 255, 0.6);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--edge);
+}
+
+.contact {
+    font-style: normal;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-d);
+}
+
+.pagehead { margin-bottom: 26px; }
+
+.pagehead h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    text-shadow:
+        -2px 0 rgba(255, 47, 185, 0.85),
+         2px 0 rgba(34, 230, 255, 0.85),
+         0 0 34px rgba(255, 47, 185, 0.5);
+}
+
+/* --- sections ----------------------------------------------------------- */
+
+section {
+    background: var(--panel);
+    border: 1px solid var(--edge);
+    padding: 26px 28px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 26px rgba(34, 230, 255, 0.09);
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--magenta);
+    text-shadow: 0 0 14px rgba(255, 47, 185, 0.6);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 47, 185, 0.35);
+}
+
+p { margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+a {
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(34, 230, 255, 0.4);
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+a:hover { color: #fff; text-shadow: 0 0 12px var(--cyan); }
+
+em { font-style: italic; }
+
+/* --- entries ------------------------------------------------------------ */
+
+.entry {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 3px 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(34, 230, 255, 0.14);
+}
+
+.entry:last-child { border-bottom: none; }
+.entry:first-child { padding-top: 0; }
+
+.when {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amberp);
+    text-shadow: 0 0 12px rgba(255, 180, 87, 0.5);
+    padding-top: 0.6em;
+}
+
+.what h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.what .sub {
+    font-size: 0.9rem;
+    color: var(--cyan);
+    margin-bottom: 0;
+}
+
+.what p {
+    margin: 8px 0 0;
+    font-size: 0.93rem;
+    line-height: 1.68;
+    color: var(--text-d);
+}
+
+/* --- publication -------------------------------------------------------- */
+
+.pub {
+    border: 1px solid rgba(255, 47, 185, 0.35);
+    padding: 22px 24px;
+    background: rgba(255, 47, 185, 0.05);
+}
+
+.pub-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.pub-meta {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amberp);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(34, 230, 255, 0.18);
+}
+
+.pub-abstract {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--text-d);
+    margin-bottom: 0;
+}
+
+.runin {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    margin-right: 4px;
+}
+
+/* --- footer ------------------------------------------------------------- */
+
+.foot { margin-top: 34px; text-align: center; }
+
+.foot p { margin: 0; }
+
+.editions-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(34, 230, 255, 0.5);
+    margin-bottom: 12px !important;
+}
+
+.editions { font-size: 0.82rem; }
+
+.editions a, .editions .here {
+    display: inline-block;
+    margin: 0 0.55em;
+    border-bottom: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.76rem;
+}
+
+.editions .here { color: var(--magenta); text-shadow: 0 0 12px rgba(255, 47, 185, 0.6); }
+
+/* --- small screens ------------------------------------------------------ */
+
+@media (max-width: 660px) {
+    body { font-size: 16px; padding: 16px 12px 0; }
+
+    body::before { width: 300px; height: 300px; }
+
+    .masthead { flex-direction: column; text-align: center; gap: 20px; padding: 22px 18px; }
+    .portrait { width: 132px; }
+    .role { letter-spacing: 0.2em; }
+
+    section { padding: 20px 18px 22px; }
+
+    .entry { grid-template-columns: 1fr; gap: 4px; }
+    .when { padding-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::after { transform: none; opacity: 0.25; }
+}

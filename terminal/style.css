@@ -124,9 +124,6 @@ body::after {
     flex-shrink: 0;
     border: 1px solid var(--green-f);
     padding: 5px;
-    /* pushed through a green phosphor: luminance only, no original hue */
-    filter: grayscale(1) contrast(1.15) brightness(0.92) sepia(1)
-            hue-rotate(65deg) saturate(3.4);
 }
 
 .ident { flex: 1; min-width: 0; }

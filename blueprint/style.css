@@ -113,10 +113,7 @@ body {
     flex-shrink: 0;
     border: 1px solid var(--line);
     padding: 6px;
-    /* luminance only, so the photograph reads as part of the cyanotype */
-    filter: grayscale(1) contrast(1.12) brightness(1.06);
-    mix-blend-mode: screen;
-    opacity: 0.92;
+    background: rgba(230, 240, 251, 0.06);
 }
 
 .ident { flex: 1; min-width: 0; }

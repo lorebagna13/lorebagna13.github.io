@@ -1,0 +1,331 @@
+/* ---------------------------------------------------------------------------
+   Glass edition. Frosted panels floating over a mesh gradient.
+   Same content as the main edition, different chrome.
+   --------------------------------------------------------------------------- */
+
+:root {
+    --base:    #0b1024;
+    --text:    #f2f4fb;
+    --text-d:  rgba(242, 244, 251, 0.72);
+    --text-f:  rgba(242, 244, 251, 0.5);
+    --accent:  #8ab6ff;
+    --accent2: #c9a2ff;
+    --pane:    rgba(255, 255, 255, 0.07);
+    --pane-2:  rgba(255, 255, 255, 0.045);
+    --edge:    rgba(255, 255, 255, 0.16);
+    --edge-s:  rgba(255, 255, 255, 0.09);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.72;
+    color: var(--text);
+    background-color: var(--base);
+    /* a mesh gradient: four soft lights bleeding into each other */
+    background-image:
+        radial-gradient(at 12% 8%,   rgba(99, 102, 241, 0.55) 0px, transparent 52%),
+        radial-gradient(at 88% 14%,  rgba(236, 72, 153, 0.38) 0px, transparent 50%),
+        radial-gradient(at 74% 82%,  rgba(45, 212, 191, 0.34) 0px, transparent 52%),
+        radial-gradient(at 22% 92%,  rgba(129, 140, 248, 0.42) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 30px 18px 60px;
+}
+
+.page { max-width: 800px; margin: 0 auto; }
+
+/* --- the frosted pane, shared by nav, masthead and sections ------------- */
+
+.nav, .masthead, section {
+    background: var(--pane);
+    backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    border: 1px solid var(--edge);
+    border-radius: 20px;
+    box-shadow:
+        0 10px 34px rgba(6, 10, 28, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    margin-bottom: 20px;
+}
+
+/* --- navigation --------------------------------------------------------- */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+}
+
+.nav a {
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    color: var(--text-d);
+    padding: 9px 20px;
+    border-radius: 100px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.nav a:hover { color: var(--text); background: rgba(255, 255, 255, 0.07); }
+
+.nav a.active {
+    color: #0b1024;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(6, 10, 28, 0.28);
+}
+
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+    padding: 26px;
+}
+
+.portrait {
+    width: 132px;
+    flex-shrink: 0;
+    display: block;
+    border-radius: 16px;
+    border: 1px solid var(--edge);
+    box-shadow: 0 8px 24px rgba(6, 10, 28, 0.4);
+}
+
+.ident { flex: 1; min-width: 0; }
+
+.name {
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.028em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    background: linear-gradient(100deg, #ffffff 0%, var(--accent) 58%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.role {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(138, 182, 255, 0.13);
+    border: 1px solid rgba(138, 182, 255, 0.24);
+    border-radius: 100px;
+    padding: 5px 13px;
+    margin-bottom: 16px;
+}
+
+.contact {
+    font-style: normal;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-d);
+}
+
+.pagehead { padding: 8px 4px 22px; }
+
+.pagehead h1 {
+    font-size: clamp(2.4rem, 8vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    background: linear-gradient(100deg, #ffffff 0%, var(--accent) 62%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* --- sections ----------------------------------------------------------- */
+
+section { padding: 26px 28px 28px; }
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-f);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--edge-s);
+}
+
+h2::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    box-shadow: 0 0 10px rgba(138, 182, 255, 0.7);
+    flex-shrink: 0;
+}
+
+p { margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 182, 255, 0.35);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+a:hover { color: #fff; border-color: #fff; }
+
+em { font-style: italic; }
+
+/* --- entries ------------------------------------------------------------ */
+
+.entry {
+    display: grid;
+    grid-template-columns: 8.8rem 1fr;
+    gap: 3px 22px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--edge-s);
+}
+
+.entry:last-child { border-bottom: none; padding-bottom: 0; }
+.entry:first-child { padding-top: 0; }
+
+.when {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--accent2);
+    padding-top: 0.42em;
+}
+
+.what h3 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -0.014em;
+    line-height: 1.4;
+}
+
+.what .sub {
+    font-size: 0.9rem;
+    color: var(--text-f);
+    margin-bottom: 0;
+}
+
+.what p {
+    margin: 8px 0 0;
+    font-size: 0.92rem;
+    line-height: 1.68;
+    color: var(--text-d);
+}
+
+/* --- publication -------------------------------------------------------- */
+
+.pub {
+    background: var(--pane-2);
+    border: 1px solid var(--edge-s);
+    border-radius: 16px;
+    padding: 22px 24px;
+}
+
+.pub-title {
+    font-size: 1.14rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.38;
+    margin-bottom: 12px;
+}
+
+.pub-meta {
+    font-size: 0.84rem;
+    color: var(--text-f);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--edge-s);
+}
+
+.pub-abstract {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-d);
+    margin-bottom: 0;
+}
+
+.runin {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    font-size: 0.76rem;
+    color: var(--accent);
+    margin-right: 4px;
+}
+
+/* --- footer ------------------------------------------------------------- */
+
+.foot { margin-top: 30px; text-align: center; }
+
+.foot p { margin: 0; }
+
+.editions-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-f);
+    margin-bottom: 12px !important;
+}
+
+.editions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    background: var(--pane);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--edge-s);
+    border-radius: 100px;
+    padding: 7px;
+}
+
+.editions a, .editions .here {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border-bottom: none;
+    color: var(--text-d);
+}
+
+.editions a:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.editions .here { background: rgba(255, 255, 255, 0.14); color: #fff; }
+
+/* --- small screens ------------------------------------------------------ */
+
+@media (max-width: 640px) {
+    body { font-size: 15.5px; padding: 18px 12px 44px; }
+
+    .nav { border-radius: 22px; justify-content: center; }
+    .nav a { padding: 8px 15px; font-size: 0.8rem; }
+
+    .masthead { flex-direction: column; text-align: center; gap: 20px; padding: 24px 20px; }
+    .portrait { width: 128px; }
+
+    section { padding: 22px 19px 24px; }
+
+    .entry { grid-template-columns: 1fr; gap: 4px; }
+    .when { padding-top: 0; }
+}

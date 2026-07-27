@@ -127,7 +127,8 @@ body {
     width: 116px;
     flex-shrink: 0;
     display: block;
-    image-rendering: pixelated;
+    /* the tiled background is nearest neighbour scaled, the photograph is not */
+    image-rendering: auto;
     background: var(--paper);
     border: 4px solid var(--outline);
     border-radius: 6px;

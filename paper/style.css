@@ -114,7 +114,6 @@ body {
     background: #faf4e6;
     border: 1px solid rgba(43, 33, 25, 0.28);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
-    filter: sepia(0.55) saturate(0.7) contrast(1.04) brightness(0.98);
 }
 
 .name {

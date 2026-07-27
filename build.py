@@ -186,7 +186,6 @@ EDITIONS = [
 
     dict(dir="emerald", label="Emerald", body="t-emerald",
          blurb="Pokemon Gen III interface",
-         portrait="photo_pixel.png",
          fonts=G + "family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;700&display=swap"),
 
     dict(dir="terminal", label="Terminal", body="t-terminal",
@@ -201,6 +200,22 @@ EDITIONS = [
     dict(dir="swiss", label="Swiss", body="t-swiss",
          blurb="international typographic style",
          fonts=G + "family=Inter:wght@300;400;500;600;700&display=swap"),
+
+    dict(dir="newspaper", label="Newspaper", body="t-newspaper",
+         blurb="broadsheet front page",
+         fonts=G + "family=UnifrakturMaguntia&"
+                   "family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&"
+                   "family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&"
+                   "display=swap"),
+
+    dict(dir="neon", label="Neon", body="t-neon",
+         blurb="synthwave grid and glow",
+         fonts=G + "family=Orbitron:wght@500;700;900&"
+                   "family=Chakra+Petch:wght@300;400;500;600&display=swap"),
+
+    dict(dir="glass", label="Glass", body="t-glass",
+         blurb="frosted panels on a mesh gradient",
+         fonts=G + "family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"),
 ]
 
 PAGES = ["index", "research", "personal"]
