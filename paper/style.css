@@ -1,6 +1,5 @@
 /* ---------------------------------------------------------------------------
-   Lorenzo Bagnasacco — "Paper & Ink" edition
-   A printed page: aged stock, iron-gall ink, rubricated headings.
+   Paper edition. A printed page: aged stock, iron gall ink, rubricated heads.
    --------------------------------------------------------------------------- */
 
 :root {
@@ -30,20 +29,19 @@ body {
         radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.45), transparent 70%);
     background-attachment: fixed;
     padding: 0 20px;
-    /* old-style figures + proper ligatures: the whole point of a Garamond */
+    /* old style figures and proper ligatures: the whole point of a Garamond */
     font-feature-settings: "onum" 1, "kern" 1, "liga" 1, "calt" 1;
     font-variant-numeric: oldstyle-nums;
 }
 
 /* --- the sheet ---------------------------------------------------------- */
 
-.sheet {
+.page {
     position: relative;
     max-width: 760px;
     margin: 0 auto;
-    padding: 76px 76px 60px;
+    padding: 74px 76px 56px;
     background-color: var(--paper);
-    /* uneven ageing: warmer, blotchier towards the edges */
     background-image:
         radial-gradient(circle at 12% 8%,  rgba(150, 112, 62, 0.09), transparent 26%),
         radial-gradient(circle at 88% 22%, rgba(150, 112, 62, 0.07), transparent 22%),
@@ -56,8 +54,7 @@ body {
         inset 0 0 90px rgba(122, 92, 52, 0.13);
 }
 
-/* paper grain */
-.sheet::before {
+.page::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -67,8 +64,7 @@ body {
     mix-blend-mode: multiply;
 }
 
-/* the faint darkening where a sheet curls away from the desk */
-.sheet::after {
+.page::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -76,102 +72,88 @@ body {
     box-shadow: inset 0 0 26px rgba(74, 54, 30, 0.16);
 }
 
-.sheet > * { position: relative; z-index: 1; }
+.page > * { position: relative; z-index: 1; }
 
-/* --- masthead ----------------------------------------------------------- */
+/* --- navigation --------------------------------------------------------- */
 
-nav {
+.nav {
     text-align: center;
-    margin-bottom: 54px;
+    margin-bottom: 50px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--rule);
 }
 
-nav a {
+.nav a {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.26em;
     text-decoration: none;
     color: var(--ink-soft);
-    margin: 0 0.35em;
-    padding: 0 0.5em;
+    margin: 0 0.5em;
+    padding: 0 0.4em;
     border-bottom: 1px solid transparent;
     transition: color 0.25s, border-color 0.25s;
 }
 
-nav a:hover { color: var(--rubric); }
+.nav a:hover { color: var(--rubric); }
 
-nav a.active {
+.nav a.active {
     color: var(--rubric);
     border-bottom-color: var(--rubric);
 }
 
-nav .sep {
-    color: var(--ink-faint);
-    font-size: 0.7rem;
-    vertical-align: 0.15em;
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead { text-align: center; margin-bottom: 44px; }
+
+.portrait {
+    display: block;
+    width: 158px;
+    margin: 0 auto 24px;
+    padding: 9px;
+    background: #faf4e6;
+    border: 1px solid rgba(43, 33, 25, 0.28);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+    filter: sepia(0.55) saturate(0.7) contrast(1.04) brightness(0.98);
 }
 
-.masthead { text-align: center; margin-bottom: 46px; }
-
-.masthead .name {
+.name {
     font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-weight: 400;
-    font-size: 3.15rem;
-    line-height: 1.08;
+    font-size: 3rem;
+    line-height: 1.1;
     letter-spacing: 0.035em;
     color: var(--ink);
 }
 
-.masthead .role {
-    margin-top: 14px;
+.role {
+    margin-top: 12px;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.3em;
     color: var(--rubric);
 }
 
-.masthead .rule {
-    width: 148px;
-    height: 1px;
-    margin: 22px auto 0;
-    background: var(--rule);
-    position: relative;
+.contact {
+    font-style: normal;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
 }
 
-.masthead .rule::after {
-    content: '❦';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--paper-warm);
-    padding: 0 12px;
-    font-size: 0.85rem;
-    color: var(--rubric);
-    line-height: 1;
-}
-
-/* --- page title (inner pages) ------------------------------------------- */
-
-h1 {
+.pagehead h1 {
     font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-weight: 400;
     font-size: 2.5rem;
     text-align: center;
     letter-spacing: 0.05em;
-    margin-bottom: 8px;
+    margin-bottom: 34px;
 }
 
-h1 + .subtitle {
-    text-align: center;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--ink-faint);
-    margin-bottom: 40px;
-}
-
-/* --- section headings --------------------------------------------------- */
+/* --- sections ----------------------------------------------------------- */
 
 h2 {
     font-family: 'EB Garamond', serif;
@@ -179,23 +161,21 @@ h2 {
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    text-align: center;
     color: var(--rubric);
-    margin: 54px 0 26px;
+    margin: 52px 0 24px;
     display: flex;
     align-items: center;
     gap: 18px;
 }
 
-h2::before,
-h2::after {
+h2::before, h2::after {
     content: '';
     flex: 1;
     height: 1px;
     background: var(--rule);
 }
 
-/* --- body copy ---------------------------------------------------------- */
+section:first-of-type h2 { margin-top: 0; }
 
 p {
     margin-bottom: 15px;
@@ -204,22 +184,19 @@ p {
     -webkit-hyphens: auto;
 }
 
-p a, .contact a {
+p:last-child { margin-bottom: 0; }
+
+a {
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid rgba(140, 59, 40, 0.45);
     transition: color 0.25s, border-color 0.25s;
 }
 
-p a:hover, .contact a:hover {
-    color: var(--rubric);
-    border-bottom-color: var(--rubric);
-}
+a:hover { color: var(--rubric); border-bottom-color: var(--rubric); }
 
-em { font-style: italic; }
-
-/* opening paragraph: drop cap, as a compositor would set it */
-.lede::first-letter {
+/* the opening paragraph of each section block, set with a drop cap */
+section:first-of-type p:first-of-type::first-letter {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
     float: left;
@@ -229,49 +206,16 @@ em { font-style: italic; }
     color: var(--rubric);
 }
 
-.lede::first-line { font-variant-caps: small-caps; letter-spacing: 0.02em; }
-
-/* --- portrait ----------------------------------------------------------- */
-
-.plate {
-    float: right;
-    width: 158px;
-    margin: 6px 0 22px 30px;
-    padding: 9px 9px 34px;
-    background: #faf4e6;
-    border: 1px solid rgba(43, 33, 25, 0.28);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
-    transform: rotate(1.1deg);
-    text-align: center;
+section:first-of-type p:first-of-type::first-line {
+    font-variant-caps: small-caps;
+    letter-spacing: 0.02em;
 }
 
-.plate img {
-    display: block;
-    width: 100%;
-    filter: sepia(0.55) saturate(0.7) contrast(1.04) brightness(0.98);
-}
-
-.plate figcaption {
-    margin-top: 11px;
-    font-size: 0.66rem;
-    font-style: italic;
-    letter-spacing: 0.08em;
-    color: var(--ink-faint);
-}
-
-.contact {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    text-align: center;
-    margin-bottom: 4px;
-}
-
-/* --- entries (education, experience, timeline) -------------------------- */
+/* --- entries ------------------------------------------------------------ */
 
 .entry {
     display: grid;
-    grid-template-columns: 7.4rem 1fr;
+    grid-template-columns: 8.6rem 1fr;
     gap: 0 26px;
     padding: 15px 0;
     border-bottom: 1px solid var(--rule-faint);
@@ -279,7 +223,7 @@ em { font-style: italic; }
 
 .entry:last-child { border-bottom: none; }
 
-.entry .year {
+.when {
     font-style: italic;
     font-size: 0.92rem;
     color: var(--rubric);
@@ -288,15 +232,23 @@ em { font-style: italic; }
     line-height: 1.5;
 }
 
-.entry .what { font-weight: 600; letter-spacing: 0.01em; }
+.what h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+}
 
-.entry .where {
+.what .sub {
     font-size: 0.95rem;
     color: var(--ink-soft);
     font-style: italic;
+    text-align: left;
+    margin-bottom: 0;
 }
 
-.entry p {
+.what p {
     margin: 6px 0 0;
     font-size: 0.94rem;
     line-height: 1.68;
@@ -304,52 +256,43 @@ em { font-style: italic; }
     text-align: left;
 }
 
-.entry a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(140, 59, 40, 0.4);
-}
+/* --- publication -------------------------------------------------------- */
 
-.entry a:hover { color: var(--rubric); border-bottom-color: var(--rubric); }
-
-/* --- a bibliographic entry ---------------------------------------------- */
-
-.reference {
+.pub {
     padding: 22px 26px;
     border: 1px solid var(--rule);
     background: rgba(255, 252, 242, 0.42);
 }
 
-.reference .title {
+.pub-title {
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
     font-style: italic;
     font-size: 1.06rem;
     line-height: 1.5;
     margin-bottom: 8px;
 }
 
-.reference .imprint {
+.pub-meta {
     font-size: 0.86rem;
     letter-spacing: 0.02em;
     color: var(--ink-soft);
     padding-bottom: 12px;
     margin-bottom: 12px;
     border-bottom: 1px solid var(--rule-faint);
+    text-align: left;
 }
 
-.reference .imprint a {
-    color: var(--rubric);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(140, 59, 40, 0.35);
-}
+.pub-meta a { color: var(--rubric); }
 
-.reference .abstract {
+.pub-abstract {
     font-size: 0.89rem;
     line-height: 1.66;
     color: var(--ink-soft);
     margin: 0;
 }
 
-.reference .abstract .runin {
+.runin {
     font-variant-caps: small-caps;
     letter-spacing: 0.09em;
     color: var(--rubric);
@@ -358,51 +301,49 @@ em { font-style: italic; }
 
 /* --- colophon ----------------------------------------------------------- */
 
-.colophon {
-    margin-top: 60px;
+.foot {
+    margin-top: 56px;
     padding-top: 22px;
     border-top: 1px solid var(--rule);
     text-align: center;
-    font-size: 0.7rem;
+}
+
+.foot p { text-align: center; margin: 0; }
+
+.editions-label {
+    font-size: 0.66rem;
     font-style: italic;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px !important;
+}
+
+.editions {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
     color: var(--ink-faint);
 }
 
-.colophon .fleuron {
-    display: block;
-    font-style: normal;
-    font-size: 0.9rem;
-    color: var(--rubric);
-    margin-bottom: 10px;
-}
+.editions a, .editions .here { margin: 0 0.45em; }
+.editions .here { color: var(--rubric); font-style: italic; }
 
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 640px) {
     body { font-size: 17px; padding: 0; }
 
-    .sheet { padding: 44px 26px 40px; }
+    .page { padding: 44px 26px 40px; }
 
-    .masthead .name { font-size: 2.3rem; }
-
-    h1 { font-size: 1.95rem; }
+    .name { font-size: 2.2rem; }
+    .pagehead h1 { font-size: 1.95rem; }
 
     h2 { letter-spacing: 0.22em; gap: 12px; }
 
-    .plate {
-        float: none;
-        margin: 0 auto 26px;
-        width: 150px;
-        transform: rotate(0deg);
-    }
+    .portrait { width: 144px; }
 
-    .entry {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-
-    .entry .year { text-align: left; }
+    .entry { grid-template-columns: 1fr; gap: 4px; }
+    .when { text-align: left; }
 
     p { text-align: left; }
 }

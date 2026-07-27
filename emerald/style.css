@@ -1,25 +1,20 @@
 /* ---------------------------------------------------------------------------
-   Lorenzo Bagnasacco — "Emerald" edition
-   Pokémon Gen III (GBA) interface: message frames, trainer card, type badges.
+   Emerald edition. Pokemon Gen III (GBA) interface: message frames, trainer
+   card, menu cursor. Same content as the main edition, different chrome.
    --------------------------------------------------------------------------- */
 
 :root {
-    --grass-dark:  #1a6e3c;
-    --grass:       #24864a;
-    --grass-lite:  #35a55f;
+    --grass:      #24864a;
+    --outline:    #101820;
+    --frame-blue: #4870c8;
+    --frame-tint: #a8c0e8;
+    --paper:      #f8f8f8;
 
-    --outline:     #101820;
-    --frame-blue:  #4870c8;
-    --frame-tint:  #a8c0e8;
-    --paper:       #f8f8f8;
-
-    --txt:         #404040;
-    --txt-shadow:  #bcbcbc;
-    --txt-blue:    #204890;
-    --txt-red:     #d03030;
-
-    --gold:        #f8c828;
-    --gold-dark:   #a87818;
+    --txt:        #404040;
+    --txt-shadow: #bcbcbc;
+    --txt-blue:   #204890;
+    --txt-red:    #d03030;
+    --gold:       #f8c828;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +27,6 @@ body {
     line-height: 1.55;
     color: var(--txt);
     background-color: var(--grass);
-    /* pixel grass tufts, scaled up with nearest-neighbour */
     background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%2324864a'/%3E%3Crect x='2' y='3' width='2' height='2' fill='%231a6e3c'/%3E%3Crect x='9' y='1' width='2' height='2' fill='%2335a55f'/%3E%3Crect x='12' y='7' width='2' height='2' fill='%231a6e3c'/%3E%3Crect x='5' y='10' width='2' height='2' fill='%2335a55f'/%3E%3Crect x='1' y='13' width='2' height='2' fill='%231a6e3c'/%3E%3Crect x='13' y='12' width='2' height='2' fill='%231a6e3c'/%3E%3C/svg%3E");
     background-size: 48px 48px;
@@ -41,20 +35,23 @@ body {
     padding: 24px 16px 40px;
 }
 
-.screen {
-    max-width: 700px;
-    margin: 0 auto;
+.page { max-width: 700px; margin: 0 auto; }
+
+/* Press Start 2P is ASCII only, so geometric glyphs need their own stack */
+.nav a::before, h2::before, .foot .editions .here::before {
+    font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', sans-serif;
 }
 
-/* --- the Gen III message frame ------------------------------------------ */
+/* --- the Gen III frame, shared by the menu and every section ------------- */
 
-.frame {
-    position: relative;
+.nav, section, .masthead {
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.nav, section {
     background: var(--paper);
     border: 4px solid var(--frame-blue);
-    border-radius: 12px;
-    padding: 22px 24px;
-    margin-bottom: 24px;
     box-shadow:
         0 0 0 4px var(--outline),
         inset 0 0 0 4px #ffffff,
@@ -62,56 +59,19 @@ body {
         0 8px 0 4px rgba(16, 24, 32, 0.22);
 }
 
-.frame p {
-    margin-bottom: 12px;
-    text-shadow: 2px 2px 0 var(--txt-shadow);
-}
+/* --- navigation --------------------------------------------------------- */
 
-.frame p:last-child { margin-bottom: 0; }
-
-.frame a {
-    color: var(--txt-blue);
-    text-decoration: none;
-    border-bottom: 2px solid var(--frame-tint);
-}
-
-.frame a:hover { color: var(--txt-red); border-bottom-color: var(--txt-red); }
-
-/* the blinking "press A to continue" arrow */
-.next::after {
-    content: '▼';
-    font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', sans-serif;
-    display: inline-block;
-    margin-left: 8px;
-    color: var(--txt-blue);
-    animation: blink 0.9s steps(1) infinite;
-}
-
-@keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
-
-/* --- menu / navigation -------------------------------------------------- */
-
-.menu {
+.nav {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 22px;
     justify-content: center;
-    background: var(--paper);
-    border: 4px solid var(--frame-blue);
-    border-radius: 12px;
     padding: 14px 18px;
-    margin-bottom: 24px;
-    box-shadow:
-        0 0 0 4px var(--outline),
-        inset 0 0 0 4px #ffffff,
-        inset 0 0 0 6px var(--frame-tint),
-        0 8px 0 4px rgba(16, 24, 32, 0.22);
 }
 
-.menu a {
+.nav a {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.6rem;
-    letter-spacing: 0.02em;
     text-decoration: none;
     color: var(--txt);
     text-shadow: 2px 2px 0 var(--txt-shadow);
@@ -120,13 +80,8 @@ body {
     white-space: nowrap;
 }
 
-/* Press Start 2P is ASCII-only, so every geometric glyph needs its own stack */
-.sym, .menu a::before, .banner::before, .tc-head::before {
-    font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', sans-serif;
-}
-
-.menu a::before {
-    content: '▶';
+.nav a::before {
+    content: '\25B6';
     position: absolute;
     left: 0;
     top: 50%;
@@ -137,88 +92,51 @@ body {
     transition: opacity 0.1s;
 }
 
-.menu a:hover::before,
-.menu a.active::before { opacity: 1; }
-
-.menu a.active { color: var(--txt-blue); }
-
-/* --- section banner ----------------------------------------------------- */
-
-.banner {
-    display: inline-block;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.62rem;
-    line-height: 1.5;
-    color: #ffffff;
-    text-shadow: 2px 2px 0 #18401f;
-    background: linear-gradient(#4cc47c, #1e8048);
-    border: 3px solid var(--outline);
-    border-radius: 7px;
-    padding: 11px 16px;
-    margin: 34px 0 16px;
-    box-shadow:
-        inset 0 3px 0 rgba(255, 255, 255, 0.35),
-        0 4px 0 #0c1410;
-}
-
-.banner::before {
-    content: '▶';
-    font-size: 0.72em;
-    margin-right: 9px;
-    vertical-align: 0.06em;
-}
+.nav a { border-bottom: none; }
+.nav a:hover::before, .nav a.active::before { opacity: 1; }
+.nav a.active { color: var(--txt-blue); }
 
 /* --- trainer card ------------------------------------------------------- */
 
-.trainer-card {
-    background:
-        linear-gradient(150deg, #3fc07a 0%, #17a05e 42%, #0e7c48 100%);
+.masthead {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 44px 20px 20px;
+    background: linear-gradient(150deg, #3fc07a 0%, #17a05e 42%, #0e7c48 100%);
     border: 4px solid var(--outline);
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 24px;
     box-shadow:
         inset 0 4px 0 rgba(255, 255, 255, 0.32),
         inset 0 -4px 0 rgba(0, 0, 0, 0.18),
         0 8px 0 rgba(16, 24, 32, 0.28);
 }
 
-.trainer-card .tc-head {
+.masthead::before {
+    content: 'TRAINER CARD';
+    position: absolute;
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.58rem;
+    font-size: 0.52rem;
     color: var(--gold);
     text-shadow: 2px 2px 0 #4a3208;
-    letter-spacing: 0.04em;
-    margin-bottom: 16px;
+    top: 18px;
+    left: 22px;
 }
 
-.trainer-card .tc-head::before {
-    content: '★';
-    font-size: 1.05em;
-    margin-right: 9px;
-    vertical-align: -0.04em;
-}
-
-.tc-body {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.tc-portrait {
+.portrait {
     width: 116px;
     flex-shrink: 0;
     display: block;
     image-rendering: pixelated;
-    background: #f8f8f8;
+    background: var(--paper);
     border: 4px solid var(--outline);
     border-radius: 6px;
     box-shadow: inset 0 0 0 3px #fff, 0 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.tc-info { flex: 1; min-width: 0; }
+.ident { flex: 1; min-width: 0; }
 
-.tc-name {
+.name {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.78rem;
     line-height: 1.65;
@@ -228,118 +146,121 @@ body {
     word-break: break-word;
 }
 
-.tc-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
+.role {
+    font-size: 0.95rem;
+    color: var(--gold);
+    text-shadow: 2px 2px 0 rgba(10, 70, 42, 0.9);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+}
+
+.contact {
+    font-style: normal;
     font-size: 0.92rem;
+    line-height: 1.65;
     color: #ffffff;
     text-shadow: 2px 2px 0 rgba(10, 70, 42, 0.9);
-    padding: 3px 0;
-    border-bottom: 2px dotted rgba(255, 255, 255, 0.28);
 }
 
-.tc-row:last-child { border-bottom: none; }
+.contact a { color: var(--gold); text-decoration: none; }
+.contact a:hover { color: #fff; }
 
-.tc-row .k { opacity: 0.85; }
-.tc-row .v { color: var(--gold); font-weight: 700; }
+.pagehead { margin-bottom: 22px; }
 
-/* --- type badges -------------------------------------------------------- */
-
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-}
-
-.badge {
+.pagehead h1 {
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: #ffffff;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.45);
-    border: 3px solid var(--outline);
-    border-radius: 5px;
-    padding: 7px 9px;
-    box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.3);
+    text-shadow: 3px 3px 0 #0d5c34;
+    padding: 4px 2px;
 }
 
-.t-psychic  { background: #f85888; }
-.t-electric { background: #c8a018; }
-.t-steel    { background: #7890a0; }
-.t-dragon   { background: #7038f8; }
-.t-fighting { background: #c03028; }
-.t-water    { background: #4880e8; }
-.t-grass    { background: #48a038; }
-.t-fire     { background: #e07028; }
-.t-ghost    { background: #6858a8; }
+/* --- sections ----------------------------------------------------------- */
 
-/* --- data rows (education, log entries) --------------------------------- */
+section { padding: 8px 8px 22px; }
 
-.row {
+h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    line-height: 1.5;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #18401f;
+    background: linear-gradient(#4cc47c, #1e8048);
+    border: 3px solid var(--outline);
+    border-radius: 7px;
+    padding: 13px 16px;
+    margin: 0 0 20px;
+    box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.35), 0 4px 0 #0c1410;
+}
+
+h2::before { content: '\25B6'; font-size: 0.72em; margin-right: 9px; }
+
+section > *:not(h2) { margin-left: 14px; margin-right: 14px; }
+
+p {
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 var(--txt-shadow);
+}
+
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--txt-blue); text-decoration: none; border-bottom: 2px solid var(--frame-tint); }
+a:hover { color: var(--txt-red); border-bottom-color: var(--txt-red); }
+
+/* --- entries ------------------------------------------------------------ */
+
+.entry {
     display: grid;
-    grid-template-columns: 8.4rem 1fr;
+    grid-template-columns: 9.4rem 1fr;
     gap: 4px 16px;
     padding: 14px 0;
     border-bottom: 3px dotted #d0d0d0;
 }
 
-.row:last-child { border-bottom: none; }
-.row:first-of-type { padding-top: 4px; }
+.entry:last-child { border-bottom: none; }
+.entry:first-child { padding-top: 2px; }
 
-.row .when {
+.when {
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.52rem;
-    line-height: 1.7;
+    font-size: 0.5rem;
+    line-height: 1.8;
     color: var(--txt-blue);
     text-shadow: 2px 2px 0 var(--txt-shadow);
     padding-top: 3px;
 }
 
-.row .what {
+.what h3 {
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.58rem;
-    line-height: 1.7;
+    font-size: 0.56rem;
+    line-height: 1.8;
     color: var(--txt);
     text-shadow: 2px 2px 0 var(--txt-shadow);
     margin-bottom: 6px;
 }
 
-.row .where {
+.what .sub {
     font-size: 0.9rem;
     color: #707070;
-    text-shadow: 2px 2px 0 #e0e0e0;
+    text-shadow: 2px 2px 0 #e4e4e4;
     margin-bottom: 4px;
 }
 
-.row p {
-    margin: 0;
-    font-size: 0.94rem;
-    line-height: 1.55;
-    text-shadow: 2px 2px 0 var(--txt-shadow);
-}
+.what p { font-size: 0.94rem; margin-bottom: 0; }
 
-/* --- pokédex-style entry ------------------------------------------------ */
+/* --- publication -------------------------------------------------------- */
 
-.dex-no {
+.pub-title {
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.5rem;
-    color: var(--txt-red);
-    text-shadow: 2px 2px 0 var(--txt-shadow);
-    margin-bottom: 10px;
-}
-
-.dex-title {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.62rem;
-    line-height: 1.8;
+    font-size: 0.6rem;
+    line-height: 1.85;
     color: var(--txt-blue);
     text-shadow: 2px 2px 0 var(--txt-shadow);
     margin-bottom: 12px;
 }
 
-.dex-meta {
+.pub-meta {
     font-size: 0.9rem;
     color: #606060;
     text-shadow: 2px 2px 0 #e4e4e4;
@@ -348,71 +269,60 @@ body {
     border-bottom: 3px dotted #d0d0d0;
 }
 
-/* --- stat bars ---------------------------------------------------------- */
+.pub-abstract { font-size: 0.94rem; margin-bottom: 0; }
 
-.stat {
-    display: grid;
-    grid-template-columns: 8.4rem 1fr;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.stat .label {
+.runin {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.5rem;
-    color: var(--txt);
-    text-shadow: 2px 2px 0 var(--txt-shadow);
-}
-
-.bar {
-    background: #585858;
-    border: 3px solid var(--outline);
-    border-radius: 5px;
-    padding: 2px;
-    height: 18px;
-}
-
-.bar span {
-    display: block;
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(#88f088, #40c840 60%, #2ea82e);
+    color: var(--txt-red);
+    margin-right: 6px;
 }
 
 /* --- footer ------------------------------------------------------------- */
 
-.footer {
+.foot {
     text-align: center;
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.48rem;
-    line-height: 2.1;
     color: #d8f0d8;
     text-shadow: 2px 2px 0 #0e4a28;
     margin-top: 30px;
 }
 
-.footer a { color: var(--gold); text-decoration: none; }
-.footer a:hover { color: #fff; }
+.foot p { text-shadow: inherit; margin: 0; }
+
+.editions-label { font-size: 0.48rem; letter-spacing: 0.08em; margin-bottom: 12px !important; }
+
+.editions { font-size: 0.5rem; line-height: 2.4; }
+
+.editions a {
+    color: var(--gold);
+    text-decoration: none;
+    border: none;
+    margin: 0 0.5em;
+}
+
+.editions a:hover { color: #fff; }
+.editions .here { color: #ffffff; margin: 0 0.5em; }
 
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 620px) {
     body { font-size: 18px; padding: 14px 10px 30px; }
 
-    .frame, .menu { padding: 18px 16px; border-radius: 10px; }
+    .nav, section, .masthead { border-radius: 10px; }
+    .nav { gap: 4px 14px; padding: 14px 12px; }
+    .nav a { font-size: 0.52rem; padding-left: 16px; }
 
-    .menu { gap: 4px 14px; }
-    .menu a { font-size: 0.52rem; padding-left: 16px; }
+    .masthead { flex-direction: column; align-items: center; text-align: center; }
+    .portrait { width: 132px; }
+    .name { font-size: 0.68rem; }
+    .contact { text-align: center; }
 
-    .tc-body { flex-direction: column; align-items: center; text-align: center; }
-    .tc-portrait { width: 132px; }
-    .tc-name { font-size: 0.68rem; }
-    .tc-row { text-align: left; }
+    .pagehead h1 { font-size: 0.8rem; }
 
-    .row, .stat { grid-template-columns: 1fr; }
-    .row .when { padding-top: 0; }
-    .bar { height: 16px; }
+    h2 { font-size: 0.54rem; padding: 11px 12px; }
+    section > *:not(h2) { margin-left: 6px; margin-right: 6px; }
 
-    .banner { font-size: 0.54rem; padding: 10px 12px; }
+    .entry { grid-template-columns: 1fr; }
+    .when { padding-top: 0; }
 }

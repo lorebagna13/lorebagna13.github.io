@@ -1,0 +1,338 @@
+/* ---------------------------------------------------------------------------
+   Terminal edition. Green phosphor CRT: scanlines, glow, amber second colour.
+   Same content as the main edition, different chrome.
+   --------------------------------------------------------------------------- */
+
+:root {
+    --bg:      #060b06;
+    --bg-lift: #0b140b;
+    --green:   #3dff78;
+    --green-d: #1f9e48;
+    --green-f: #17662f;
+    --amber:   #ffb63d;
+    --glow:    0 0 6px rgba(61, 255, 120, 0.45);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--green);
+    background: var(--bg);
+    padding: 0 18px;
+    min-height: 100vh;
+}
+
+/* the tube: a soft green bloom in the middle, darkness at the corners */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+        radial-gradient(ellipse at 50% 45%, rgba(61, 255, 120, 0.07), transparent 62%),
+        radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* scanlines */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0 2px,
+        rgba(0, 0, 0, 0.22) 2px 4px);
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 42px 0 70px;
+    text-shadow: var(--glow);
+    animation: flicker 7s ease-in-out infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    47%      { opacity: 0.97; }
+    48%      { opacity: 1; }
+    72%      { opacity: 0.98; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page { animation: none; }
+}
+
+/* --- navigation --------------------------------------------------------- */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 4px;
+    padding-bottom: 14px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--green-f);
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--green-d);
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    padding: 2px 10px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.nav a::before { content: '['; margin-right: 4px; opacity: 0.5; }
+.nav a::after  { content: ']'; margin-left: 4px; opacity: 0.5; }
+
+.nav a { border-bottom: none; }
+.nav a:hover { color: var(--green); }
+
+/* the selected item is inverted, the way a curses menu highlights a row */
+.nav a.active {
+    background: var(--green);
+    color: var(--bg);
+    text-shadow: none;
+}
+
+.nav a.active::before, .nav a.active::after { opacity: 0.6; }
+
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead {
+    display: flex;
+    gap: 26px;
+    align-items: flex-start;
+    padding-bottom: 30px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--green-f);
+}
+
+.portrait {
+    width: 128px;
+    flex-shrink: 0;
+    border: 1px solid var(--green-f);
+    padding: 5px;
+    /* pushed through a green phosphor: luminance only, no original hue */
+    filter: grayscale(1) contrast(1.15) brightness(0.92) sepia(1)
+            hue-rotate(65deg) saturate(3.4);
+}
+
+.ident { flex: 1; min-width: 0; }
+
+.name {
+    font-size: 1.65rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.name::before { content: '> '; color: var(--green-d); }
+
+.role {
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    margin-bottom: 16px;
+}
+
+.contact {
+    font-style: normal;
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: var(--green-d);
+}
+
+.pagehead { margin-bottom: 30px; }
+
+.pagehead h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+}
+
+.pagehead h1::before { content: '$ cat '; color: var(--green-d); font-weight: 400; }
+
+.pagehead h1::after {
+    content: '\2588';
+    margin-left: 8px;
+    animation: caret 1.1s steps(1) infinite;
+}
+
+@keyframes caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .pagehead h1::after { animation: none; }
+}
+
+/* --- sections ----------------------------------------------------------- */
+
+section { margin-bottom: 42px; }
+
+h2 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--green-f);
+}
+
+h2::before { content: '## '; color: var(--green-f); }
+
+p { margin-bottom: 13px; }
+p:last-child { margin-bottom: 0; }
+
+a {
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--green-d);
+}
+
+a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+em { font-style: italic; color: var(--green); }
+
+/* --- entries ------------------------------------------------------------ */
+
+.entry {
+    display: grid;
+    grid-template-columns: 10.5rem 1fr;
+    gap: 2px 20px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(31, 158, 72, 0.28);
+}
+
+.entry:last-child { border-bottom: none; }
+.entry:first-child { padding-top: 0; }
+
+.when {
+    color: var(--amber);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    padding-top: 0.2em;
+}
+
+.when::before { content: '['; opacity: 0.45; }
+.when::after  { content: ']'; opacity: 0.45; }
+
+.what h3 {
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+}
+
+.what .sub {
+    font-size: 0.86rem;
+    color: var(--green-d);
+    margin-bottom: 0;
+}
+
+.what p {
+    margin: 7px 0 0;
+    font-size: 0.9rem;
+    line-height: 1.72;
+    color: rgba(61, 255, 120, 0.78);
+}
+
+/* --- publication -------------------------------------------------------- */
+
+.pub {
+    border: 1px solid var(--green-f);
+    background: var(--bg-lift);
+    padding: 20px 22px;
+}
+
+.pub-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.pub-meta {
+    font-size: 0.84rem;
+    color: var(--amber);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed rgba(31, 158, 72, 0.28);
+}
+
+.pub-abstract {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: rgba(61, 255, 120, 0.78);
+    margin-bottom: 0;
+}
+
+.runin {
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+}
+
+/* --- footer ------------------------------------------------------------- */
+
+.foot {
+    margin-top: 50px;
+    padding-top: 18px;
+    border-top: 1px solid var(--green-f);
+    font-size: 0.82rem;
+}
+
+.foot p { margin: 0; }
+
+.editions-label {
+    color: var(--green-f);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    margin-bottom: 8px !important;
+}
+
+.editions { color: var(--green-d); }
+
+.editions a, .editions .here {
+    display: inline-block;
+    margin-right: 10px;
+    border-bottom: none;
+    text-transform: lowercase;
+}
+
+.editions a::before, .editions .here::before { content: '['; opacity: 0.45; }
+.editions a::after,  .editions .here::after  { content: ']'; opacity: 0.45; }
+
+.editions .here { color: var(--amber); }
+
+/* --- small screens ------------------------------------------------------ */
+
+@media (max-width: 640px) {
+    body { font-size: 14px; padding: 0 14px; }
+
+    .page { padding: 28px 0 50px; }
+
+    .masthead { flex-direction: column; gap: 20px; }
+    .portrait { width: 118px; }
+    .name { font-size: 1.35rem; }
+
+    .entry { grid-template-columns: 1fr; gap: 2px; }
+    .when { padding-top: 0; }
+}

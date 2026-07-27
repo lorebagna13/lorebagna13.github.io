@@ -1,0 +1,336 @@
+/* ---------------------------------------------------------------------------
+   Blueprint edition. A cyanotype drafting sheet: grid, hairlines, corner ticks
+   and a title block. Same content as the main edition, different chrome.
+   --------------------------------------------------------------------------- */
+
+:root {
+    --blue:      #0e3a68;
+    --blue-deep: #0a2b4e;
+    --ink:       #e6f0fb;
+    --ink-soft:  rgba(230, 240, 251, 0.72);
+    --ink-faint: rgba(230, 240, 251, 0.45);
+    --line:      rgba(230, 240, 251, 0.34);
+    --line-soft: rgba(230, 240, 251, 0.16);
+    --accent:    #ffd166;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.72;
+    color: var(--ink);
+    background-color: var(--blue);
+    /* the drawing grid: 8px minor, 40px major */
+    background-image:
+        linear-gradient(var(--line-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-soft) 1px, transparent 1px),
+        linear-gradient(rgba(230, 240, 251, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(230, 240, 251, 0.07) 1px, transparent 1px),
+        radial-gradient(ellipse at 50% 30%, rgba(52, 116, 184, 0.5), transparent 70%);
+    background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px, 100% 100%;
+    background-attachment: fixed;
+    padding: 26px 18px 40px;
+}
+
+.page {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 46px 46px 40px;
+    border: 1px solid var(--line);
+    background: rgba(10, 43, 78, 0.55);
+}
+
+/* registration ticks in the sheet corners */
+.page::before, .page::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+}
+
+.page::before {
+    top: 10px; left: 10px;
+    border-top: 1px solid var(--accent);
+    border-left: 1px solid var(--accent);
+}
+
+.page::after {
+    bottom: 10px; right: 10px;
+    border-bottom: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+}
+
+/* --- navigation --------------------------------------------------------- */
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+}
+
+.nav a {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding: 11px 20px;
+    border-right: 1px solid var(--line);
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav a { border-bottom: none; }
+.nav a:last-child { border-right: none; }
+.nav a:hover { background: rgba(230, 240, 251, 0.08); color: var(--ink); }
+
+.nav a.active {
+    color: var(--blue-deep);
+    background: var(--accent);
+    font-weight: 700;
+}
+
+/* --- masthead ----------------------------------------------------------- */
+
+.masthead {
+    display: flex;
+    gap: 34px;
+    align-items: flex-start;
+    padding-bottom: 34px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+}
+
+.portrait {
+    width: 150px;
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+    padding: 6px;
+    /* luminance only, so the photograph reads as part of the cyanotype */
+    filter: grayscale(1) contrast(1.12) brightness(1.06);
+    mix-blend-mode: screen;
+    opacity: 0.92;
+}
+
+.ident { flex: 1; min-width: 0; }
+
+.name {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+}
+
+.role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--line-soft);
+}
+
+.contact {
+    font-style: normal;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+}
+
+.pagehead {
+    padding-bottom: 22px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--line);
+}
+
+.pagehead h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+}
+
+/* --- sections ----------------------------------------------------------- */
+
+section {
+    position: relative;
+    border: 1px solid var(--line-soft);
+    padding: 34px 26px 26px;
+    margin-bottom: 34px;
+}
+
+/* the section label sits on the rule, like a callout on a drawing */
+h2 {
+    position: absolute;
+    top: -0.72em;
+    left: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--accent);
+    background: var(--blue);
+    padding: 0 12px;
+}
+
+p { margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+}
+
+a:hover { color: var(--accent); }
+
+em { font-style: italic; }
+
+/* --- entries ------------------------------------------------------------ */
+
+.entry {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 2px 26px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--line-soft);
+}
+
+.entry:last-child { border-bottom: none; }
+.entry:first-child { padding-top: 0; }
+
+.when {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-top: 0.4em;
+}
+
+.what h3 {
+    font-size: 1.06rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.45;
+}
+
+.what .sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+    margin-bottom: 0;
+}
+
+.what p {
+    margin: 8px 0 0;
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+
+/* --- publication -------------------------------------------------------- */
+
+.pub { border: 1px solid var(--line); padding: 22px 24px; }
+
+.pub-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.45;
+    margin-bottom: 12px;
+}
+
+.pub-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--line-soft);
+}
+
+.pub-abstract {
+    font-size: 0.94rem;
+    line-height: 1.72;
+    color: var(--ink-soft);
+    margin-bottom: 0;
+}
+
+.runin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+}
+
+/* --- title block -------------------------------------------------------- */
+
+.foot {
+    margin-top: 40px;
+    border: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.foot p { margin: 0; padding: 10px 16px; }
+
+.editions-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.editions { font-size: 0.78rem; letter-spacing: 0.04em; }
+
+.editions a, .editions .here {
+    display: inline-block;
+    margin-right: 18px;
+    text-transform: uppercase;
+    border-bottom: none;
+    color: var(--ink-soft);
+}
+
+.editions a:hover { color: var(--accent); }
+.editions .here { color: var(--accent); font-weight: 500; }
+
+/* --- small screens ------------------------------------------------------ */
+
+@media (max-width: 680px) {
+    body { font-size: 15.5px; padding: 12px 10px 30px; }
+
+    .page { padding: 30px 20px 26px; }
+    .page::before, .page::after { display: none; }
+
+    .nav a { padding: 10px 14px; letter-spacing: 0.14em; font-size: 0.7rem; }
+
+    .masthead { flex-direction: column; gap: 24px; }
+    .name { font-size: 2rem; }
+    .pagehead h1 { font-size: 1.9rem; }
+
+    section { padding: 30px 16px 20px; }
+    h2 { left: 12px; letter-spacing: 0.18em; }
+
+    .entry { grid-template-columns: 1fr; gap: 4px; }
+    .when { padding-top: 0; }
+}
