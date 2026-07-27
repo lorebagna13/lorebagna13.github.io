@@ -1,0 +1,408 @@
+/* ---------------------------------------------------------------------------
+   Lorenzo Bagnasacco — "Paper & Ink" edition
+   A printed page: aged stock, iron-gall ink, rubricated headings.
+   --------------------------------------------------------------------------- */
+
+:root {
+    --paper:      #f2e9d7;
+    --paper-warm: #ece0c8;
+    --desk:       #2a2019;
+    --ink:        #2b2119;
+    --ink-soft:   #574839;
+    --ink-faint:  #8b7963;
+    --rubric:     #8c3b28;
+    --rule:       rgba(43, 33, 25, 0.22);
+    --rule-faint: rgba(43, 33, 25, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--ink);
+    background-color: var(--desk);
+    background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(120, 96, 70, 0.35), transparent 70%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.45), transparent 70%);
+    background-attachment: fixed;
+    padding: 0 20px;
+    /* old-style figures + proper ligatures: the whole point of a Garamond */
+    font-feature-settings: "onum" 1, "kern" 1, "liga" 1, "calt" 1;
+    font-variant-numeric: oldstyle-nums;
+}
+
+/* --- the sheet ---------------------------------------------------------- */
+
+.sheet {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 76px 76px 60px;
+    background-color: var(--paper);
+    /* uneven ageing: warmer, blotchier towards the edges */
+    background-image:
+        radial-gradient(circle at 12% 8%,  rgba(150, 112, 62, 0.09), transparent 26%),
+        radial-gradient(circle at 88% 22%, rgba(150, 112, 62, 0.07), transparent 22%),
+        radial-gradient(circle at 24% 72%, rgba(136, 100, 54, 0.06), transparent 20%),
+        radial-gradient(circle at 78% 91%, rgba(150, 112, 62, 0.10), transparent 28%),
+        linear-gradient(155deg, var(--paper) 0%, var(--paper-warm) 55%, var(--paper) 100%);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.28),
+        0 18px 50px rgba(0, 0, 0, 0.45),
+        inset 0 0 90px rgba(122, 92, 52, 0.13);
+}
+
+/* paper grain */
+.sheet::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.10;
+    mix-blend-mode: multiply;
+}
+
+/* the faint darkening where a sheet curls away from the desk */
+.sheet::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 26px rgba(74, 54, 30, 0.16);
+}
+
+.sheet > * { position: relative; z-index: 1; }
+
+/* --- masthead ----------------------------------------------------------- */
+
+nav {
+    text-align: center;
+    margin-bottom: 54px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+}
+
+nav a {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    text-decoration: none;
+    color: var(--ink-soft);
+    margin: 0 0.35em;
+    padding: 0 0.5em;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+}
+
+nav a:hover { color: var(--rubric); }
+
+nav a.active {
+    color: var(--rubric);
+    border-bottom-color: var(--rubric);
+}
+
+nav .sep {
+    color: var(--ink-faint);
+    font-size: 0.7rem;
+    vertical-align: 0.15em;
+}
+
+.masthead { text-align: center; margin-bottom: 46px; }
+
+.masthead .name {
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+    font-weight: 400;
+    font-size: 3.15rem;
+    line-height: 1.08;
+    letter-spacing: 0.035em;
+    color: var(--ink);
+}
+
+.masthead .role {
+    margin-top: 14px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--rubric);
+}
+
+.masthead .rule {
+    width: 148px;
+    height: 1px;
+    margin: 22px auto 0;
+    background: var(--rule);
+    position: relative;
+}
+
+.masthead .rule::after {
+    content: '❦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--paper-warm);
+    padding: 0 12px;
+    font-size: 0.85rem;
+    color: var(--rubric);
+    line-height: 1;
+}
+
+/* --- page title (inner pages) ------------------------------------------- */
+
+h1 {
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+    font-weight: 400;
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+h1 + .subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    margin-bottom: 40px;
+}
+
+/* --- section headings --------------------------------------------------- */
+
+h2 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    text-align: center;
+    color: var(--rubric);
+    margin: 54px 0 26px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+h2::before,
+h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+}
+
+/* --- body copy ---------------------------------------------------------- */
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+p a, .contact a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140, 59, 40, 0.45);
+    transition: color 0.25s, border-color 0.25s;
+}
+
+p a:hover, .contact a:hover {
+    color: var(--rubric);
+    border-bottom-color: var(--rubric);
+}
+
+em { font-style: italic; }
+
+/* opening paragraph: drop cap, as a compositor would set it */
+.lede::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    float: left;
+    font-size: 3.9em;
+    line-height: 0.78;
+    padding: 0.06em 0.1em 0 0;
+    color: var(--rubric);
+}
+
+.lede::first-line { font-variant-caps: small-caps; letter-spacing: 0.02em; }
+
+/* --- portrait ----------------------------------------------------------- */
+
+.plate {
+    float: right;
+    width: 158px;
+    margin: 6px 0 22px 30px;
+    padding: 9px 9px 34px;
+    background: #faf4e6;
+    border: 1px solid rgba(43, 33, 25, 0.28);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+    transform: rotate(1.1deg);
+    text-align: center;
+}
+
+.plate img {
+    display: block;
+    width: 100%;
+    filter: sepia(0.55) saturate(0.7) contrast(1.04) brightness(0.98);
+}
+
+.plate figcaption {
+    margin-top: 11px;
+    font-size: 0.66rem;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+}
+
+.contact {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+/* --- entries (education, experience, timeline) -------------------------- */
+
+.entry {
+    display: grid;
+    grid-template-columns: 7.4rem 1fr;
+    gap: 0 26px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--rule-faint);
+}
+
+.entry:last-child { border-bottom: none; }
+
+.entry .year {
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--rubric);
+    text-align: right;
+    padding-top: 0.14em;
+    line-height: 1.5;
+}
+
+.entry .what { font-weight: 600; letter-spacing: 0.01em; }
+
+.entry .where {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+.entry p {
+    margin: 6px 0 0;
+    font-size: 0.94rem;
+    line-height: 1.68;
+    color: var(--ink-soft);
+    text-align: left;
+}
+
+.entry a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140, 59, 40, 0.4);
+}
+
+.entry a:hover { color: var(--rubric); border-bottom-color: var(--rubric); }
+
+/* --- a bibliographic entry ---------------------------------------------- */
+
+.reference {
+    padding: 22px 26px;
+    border: 1px solid var(--rule);
+    background: rgba(255, 252, 242, 0.42);
+}
+
+.reference .title {
+    font-style: italic;
+    font-size: 1.06rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.reference .imprint {
+    font-size: 0.86rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--rule-faint);
+}
+
+.reference .imprint a {
+    color: var(--rubric);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140, 59, 40, 0.35);
+}
+
+.reference .abstract {
+    font-size: 0.89rem;
+    line-height: 1.66;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+.reference .abstract .runin {
+    font-variant-caps: small-caps;
+    letter-spacing: 0.09em;
+    color: var(--rubric);
+    font-size: 0.95em;
+}
+
+/* --- colophon ----------------------------------------------------------- */
+
+.colophon {
+    margin-top: 60px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 0.7rem;
+    font-style: italic;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+}
+
+.colophon .fleuron {
+    display: block;
+    font-style: normal;
+    font-size: 0.9rem;
+    color: var(--rubric);
+    margin-bottom: 10px;
+}
+
+/* --- small screens ------------------------------------------------------ */
+
+@media (max-width: 640px) {
+    body { font-size: 17px; padding: 0; }
+
+    .sheet { padding: 44px 26px 40px; }
+
+    .masthead .name { font-size: 2.3rem; }
+
+    h1 { font-size: 1.95rem; }
+
+    h2 { letter-spacing: 0.22em; gap: 12px; }
+
+    .plate {
+        float: none;
+        margin: 0 auto 26px;
+        width: 150px;
+        transform: rotate(0deg);
+    }
+
+    .entry {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .entry .year { text-align: left; }
+
+    p { text-align: left; }
+}
