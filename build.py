@@ -37,7 +37,8 @@ JREF = f'<a href="{DOI}">J. Phys. A: Math. Theor. 58 (2025)</a>'
 
 ABOUT = [
     'Welcome to my personal website! Here you can find information about my '
-    '<a href="research.html">research</a> and a bit about me as a '
+    '<a href="research.html">research</a>, some <a href="projects.html">'
+    'projects</a> I work on for fun, and a bit about me as a '
     '<a href="personal.html">person</a>.',
 
     f'Feel free to reach out at <a href="mailto:{EMAIL}">{EMAIL}</a>. I am '
@@ -124,6 +125,24 @@ EXPERIENCE = [
               "within the Sienese Scientific Degree Plan, featuring "
               "experimental workshops, problem-solving sessions, and expert "
               "seminars on physics and the laws of nature."),
+]
+
+PROJECTS_INTRO = [
+    "Outside my research, I like building things end to end, from the data to "
+    "a working system. Below are the projects I work on for fun.",
+]
+
+PROJECTS = [
+    dict(when="2026", what="TAOG",
+         sub="The AI of GOAT",
+         text="A bot trained to play the GOAT format of Yu-Gi-Oh! (cards "
+              "frozen at 2005), learning first by imitation and then by self "
+              "play on top of a real rules engine. The goal is to bring "
+              "something new to the community: use the bot to learn tactics, "
+              "test decks, or see what it recommends in a given situation. "
+              "Play a duel against it at "
+              '<a href="https://theaiofgoat.com" target="_blank" '
+              'rel="noopener noreferrer">theaiofgoat.com</a>.'),
 ]
 
 PERSONAL_INTRO = [
@@ -218,17 +237,21 @@ EDITIONS = [
          fonts=G + "family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"),
 ]
 
-PAGES = ["index", "research", "personal"]
-PAGE_LABEL = {"index": "Home", "research": "Research", "personal": "Personal"}
+PAGES = ["index", "research", "projects", "personal"]
+PAGE_LABEL = {"index": "Home", "research": "Research", "projects": "Projects",
+              "personal": "Personal"}
 PAGE_TITLE = {
     "index": NAME,
     "research": f"Research &middot; {NAME}",
+    "projects": f"Projects &middot; {NAME}",
     "personal": f"Personal &middot; {NAME}",
 }
 PAGE_DESC = {
     "index": f"{NAME}, {ROLE} at the Scuola Normale Superiore in Pisa.",
     "research": "Mathematical methods for quantum dynamics: education, "
                 "publications and academic experience.",
+    "projects": "Personal projects, including TAOG, a bot that learned to "
+                "play the Yu-Gi-Oh! GOAT format.",
     "personal": "Sports, martial arts and other pursuits outside academia.",
 }
 
@@ -293,6 +316,13 @@ def body_for(page, portrait):
             section("Education", [entries(EDUCATION)]),
             section("Publications", [publication()]),
             section("Academic Experience", [entries(EXPERIENCE)]),
+        ])
+
+    if page == "projects":
+        return "\n\n".join([
+            '      <header class="pagehead"><h1>Projects</h1></header>',
+            section("Overview", [paragraphs(PROJECTS_INTRO)]),
+            section("Projects", [entries(PROJECTS)]),
         ])
 
     return "\n\n".join([
@@ -399,12 +429,13 @@ def stub(page):
 
 def sitemap():
     urls = []
-    for page, priority in [("index", "1.0"), ("research", "0.8"), ("personal", "0.6")]:
+    for page, priority in [("index", "1.0"), ("research", "0.8"),
+                           ("projects", "0.7"), ("personal", "0.6")]:
         loc = BASE + (CANONICAL_EDITION + "/" if page == "index"
                       else f"{CANONICAL_EDITION}/{page}.html")
         urls.append(f"""    <url>
         <loc>{loc}</loc>
-        <lastmod>2026-07-27</lastmod>
+        <lastmod>2026-08-10</lastmod>
         <priority>{priority}</priority>
     </url>""")
     body = "\n".join(urls)
