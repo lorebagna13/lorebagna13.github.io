@@ -247,6 +247,29 @@ a:hover { color: #fff; }
 
 .foot p { font-size: inherit; color: inherit; margin: 0; }
 
+/* The edition switcher. The label is a full sentence, so it opts out of the
+   uppercase treatment the rest of the footer carries. */
+
+.foot .editions-label {
+    margin: 16px 0 7px;
+    font-size: 0.8rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: rgba(245, 240, 232, 0.5);
+}
+
+.foot .editions {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(245, 240, 232, 0.45);
+}
+
+.foot .editions a, .foot .editions .here { margin-right: 0.9em; }
+.foot .editions a { color: var(--gold-light); }
+.foot .editions a:hover { color: #fff; }
+.foot .editions .here { color: var(--gold); }
+
 /* --- small screens ------------------------------------------------------ */
 
 @media (max-width: 640px) {

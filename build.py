@@ -87,6 +87,13 @@ PUBLICATION = dict(
 )
 
 EXPERIENCE = [
+    dict(when="2026", what="Quantum Roundabout 2026",
+         sub="University of Nottingham, Nottingham, United Kingdom",
+         text="Contributed talk at the "
+              '<a href="https://quantumroundabout.wordpress.com/" target="_blank" '
+              'rel="noopener noreferrer">postgraduate conference on quantum '
+              "physics</a> held at the School of Mathematical Sciences "
+              "(September 9 to 11), presenting some of my most recent results."),
     dict(when="2026", what="Visiting period",
          sub="University College London, London, United Kingdom",
          text="One-week research stay in Prof. Sougato Bose&rsquo;s group, where I "
@@ -351,16 +358,28 @@ def nav(page):
 
 
 def foot(ed, page):
-    if ed["dir"] == CANONICAL_EDITION:
-        return f'      <footer class="foot"><p>{NAME}</p></footer>'
+    """Footer with the edition switcher.
+
+    The canonical edition keeps its name line and invites the reader to try
+    another look; the other editions carry the plain switcher.
+    """
     others = []
     for other in EDITIONS:
         if other["dir"] == ed["dir"]:
             others.append(f'<span class="here">{other["label"]}</span>')
         else:
             others.append(f'<a href="../{other["dir"]}/{page}.html">{other["label"]}</a>')
+
+    if ed["dir"] == CANONICAL_EDITION:
+        lead = f'        <p>{NAME}</p>\n'
+        label = "Want a different look? Change the theme here."
+    else:
+        lead = ""
+        label = "Editions"
+
     return ('      <footer class="foot">\n'
-            f'        <p class="editions-label">Editions</p>\n'
+            f'{lead}'
+            f'        <p class="editions-label">{label}</p>\n'
             f'        <p class="editions">{" ".join(others)}</p>\n'
             '      </footer>')
 
