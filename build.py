@@ -67,24 +67,44 @@ EDUCATION = [
          sub="University of Pisa, Pisa, Italy"),
 ]
 
-PUBLICATION = dict(
-    title="Formal Integration of Electron Scattering Processes via Separation "
-          "of Dynamical and Geometric Contributions",
-    venue="Journal of Physics A: Mathematical and Theoretical, 58 (2025)",
-    doi=DOI,
-    doi_label="doi:10.1088/1751-8121/ae2995",
-    abstract=
-        "By decoupling the geometric from the dynamical contributions in the "
-        "scattering processes, we develop a method to compute the scattering "
-        "matrix of electrons in a one-dimensional coherent conductor connected "
-        "to two electrodes. In particular, we demonstrate that, in the "
-        "high-energy regime, the transmission matrix converges to the Berry "
-        "operator of the system. We showcase the method through several "
-        "examples featuring different in-plane magnetic field profiles. "
-        "Notably, our results reveal the possibility of achieving near-perfect "
-        "spin-flip transmission, highlighting potential applications in "
-        "spintronics.",
-)
+PUBLICATIONS = [
+    dict(
+        title="Improved convergence radius of the Fer expansion for Hermitian "
+              "generators",
+        venue="arXiv preprint (2026)",
+        doi="https://arxiv.org/abs/2609.28302",
+        doi_label="arXiv:2609.28302",
+        abstract=
+            "The Dyson series expands the propagator of a time-dependent "
+            "Hamiltonian in powers of the Hamiltonian, but its truncations are "
+            "in general not unitary. The Fer expansion writes the same "
+            "propagator as an infinite product of matrix exponentials, each of "
+            "them unitary, and its remainder decays doubly exponentially with "
+            "the number of factors. Convergence, however, is guaranteed only "
+            "within a finite radius: the time integral of the norm of the "
+            "Hamiltonian must be smaller than 2. This is the best value known "
+            "to date. Here we improve it by about 30%, raising it to about "
+            "2.6058.",
+    ),
+    dict(
+        title="Formal Integration of Electron Scattering Processes via Separation "
+              "of Dynamical and Geometric Contributions",
+        venue="Journal of Physics A: Mathematical and Theoretical, 58 (2025)",
+        doi=DOI,
+        doi_label="doi:10.1088/1751-8121/ae2995",
+        abstract=
+            "By decoupling the geometric from the dynamical contributions in the "
+            "scattering processes, we develop a method to compute the scattering "
+            "matrix of electrons in a one-dimensional coherent conductor connected "
+            "to two electrodes. In particular, we demonstrate that, in the "
+            "high-energy regime, the transmission matrix converges to the Berry "
+            "operator of the system. We showcase the method through several "
+            "examples featuring different in-plane magnetic field profiles. "
+            "Notably, our results reveal the possibility of achieving near-perfect "
+            "spin-flip transmission, highlighting potential applications in "
+            "spintronics.",
+    ),
+]
 
 EXPERIENCE = [
     dict(when="2026", what="Quantum Roundabout 2026",
@@ -321,7 +341,7 @@ def body_for(page, portrait):
             '      <header class="pagehead"><h1>Research</h1></header>',
             section("Overview", [paragraphs(RESEARCH_INTRO)]),
             section("Education", [entries(EDUCATION)]),
-            section("Publications", [publication()]),
+            section("Publications", [publication(p) for p in PUBLICATIONS]),
             section("Academic Experience", [entries(EXPERIENCE)]),
         ])
 
@@ -340,8 +360,7 @@ def body_for(page, portrait):
     ])
 
 
-def publication():
-    p = PUBLICATION
+def publication(p):
     return f"""        <article class="pub">
           <h3 class="pub-title">{p['title']}</h3>
           <p class="pub-meta">{p['venue']} &middot; <a href="{p['doi']}">{p['doi_label']}</a></p>

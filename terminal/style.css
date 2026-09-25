@@ -262,6 +262,8 @@ em { font-style: italic; color: var(--green); }
     padding: 20px 22px;
 }
 
+.pub + .pub { margin-top: 20px; }
+
 .pub-title {
     font-size: 0.98rem;
     font-weight: 600;

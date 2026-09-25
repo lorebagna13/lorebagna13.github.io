@@ -257,6 +257,8 @@ a:hover { color: var(--txt-red); border-bottom-color: var(--txt-red); }
 
 /* --- publication -------------------------------------------------------- */
 
+.pub + .pub { margin-top: 20px; }
+
 .pub-title {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.6rem;

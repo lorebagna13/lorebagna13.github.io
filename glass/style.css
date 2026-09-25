@@ -246,6 +246,8 @@ em { font-style: italic; }
     padding: 22px 24px;
 }
 
+.pub + .pub { margin-top: 20px; }
+
 .pub-title {
     font-size: 1.14rem;
     font-weight: 700;

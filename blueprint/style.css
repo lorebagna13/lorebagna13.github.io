@@ -251,6 +251,8 @@ em { font-style: italic; }
 
 .pub { border: 1px solid var(--line); padding: 22px 24px; }
 
+.pub + .pub { margin-top: 20px; }
+
 .pub-title {
     font-size: 1.1rem;
     font-weight: 700;

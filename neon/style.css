@@ -286,6 +286,8 @@ em { font-style: italic; }
     background: rgba(255, 47, 185, 0.05);
 }
 
+.pub + .pub { margin-top: 20px; }
+
 .pub-title {
     font-family: 'Chakra Petch', sans-serif;
     font-size: 1.18rem;
